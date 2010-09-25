@@ -728,10 +728,10 @@ class Head(Reference):
 		configs = self.repo.config_reader()
 		remote_name = configs.get_value('branch "%s"' % self.name, 'remote', '')
 		merge = configs.get_value('branch "%s"' % self.name, 'merge', '')
-		if remote_name != '.':
+		if remote_name != '.' and remote_name:
 			remote = self.repo.remote(remote_name)
-			for ref in remote.refs:
-				if 'refs/heads/%s' % ref.remote_head == merge:
+	   		for ref in remote.refs:
+	   			if 'refs/heads/%s' % ref.remote_head == merge:
 					return ref
 
 	def rename(self, new_path, force=False):
